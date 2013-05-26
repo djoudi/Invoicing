@@ -1,0 +1,51 @@
+PERSISTENCE.XML:
+----------------
+<!-- Tomcat + PostgreSQL -->
+	<persistence-unit name="default">
+		<non-jta-data-source>java:comp/env/jdbc/InvoicingDS</non-jta-data-source>
+		<class>org.openxava.session.GalleryImage</class>
+		<properties>
+			<!-- Dialecto de PostgreSQL -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+		</properties>
+	</persistence-unit>
+
+
+<!-- JUnit PostgreSQL -->
+	<persistence-unit name="junit">
+		<properties>
+			<!-- Clase del controlador de PostgreSQL -->
+			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
+			<!-- Dialecto de PostgreSQL -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost/invoicing" />
+			<!-- El usuario de la base datos -->
+			<property name="hibernate.connection.username" value="postgres" />
+			<!-- La contraseña del usuario de la base de datos -->
+			<property name="hibernate.connection.password" value="openxava" />
+		</properties>
+	</persistence-unit>
+
+
+
+context:
+---------
+
+	<Resource name="jdbc/InvoicingDS" auth="Container" type="javax.sql.DataSource"
+		maxActive="20" maxIdle="5" maxWait="10000" username="postgres"
+		password="openxava" driverClassName="org.postgresql.Driver"
+		url="jdbc:postgresql://localhost/invoicing" />
+
+
+
+
+BUILD.XML:
+----------
+
+<target name="updateSchema">
+		<ant antfile="../OpenXava/build.xml" target="updateSchemaJPA">
+			<property name="persistence.unit" value="junit" />
+			<!-- The path of your JDBC driver -->
+			<property name="schema.path" value="D:/desarrollo/openxava-4.7/tomcat/lib/postgresql-9.2-1002.jdbc4.jar" />
+		</ant>
+	</target>
