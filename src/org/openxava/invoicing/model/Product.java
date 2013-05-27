@@ -23,7 +23,7 @@ public class Product {
 	@DescriptionsList // Así la referencia se visualiza usando un combo	
 	private Category category; // Una referencia Java convencional
 
-	@Stereotype("MONEY")
+	@Stereotype("DINERO")
 	// La propiedad price se usa para almacenar dinero
 	private BigDecimal price; // BigDecimal se suele usar para dinero
 
