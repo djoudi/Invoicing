@@ -5,7 +5,9 @@ import javax.persistence.*;
 import org.openxava.annotations.*;
 
 @Entity
-// Esto marca la clase Customer como una entidad
+@View(name="Simple", // Esta vista solo se usará cuando se especifique “Simple”
+members="number, name" // Muestra únicamente number y name en la misma línea
+)
 public class Customer {
 
 	@Id

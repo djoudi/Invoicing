@@ -14,6 +14,12 @@ import org.openxava.calculators.*;
 import org.openxava.invoicing.calculators.*;
 
 @Entity
+@View(members= // Esta vista no tiene nombre, por tanto será la vista usada por defecto
+"year, number, date;" + // Separados por coma significa en la misma línea
+"customer;" + // Punto y coma significa nueva línea
+"details;" +
+"remarks"
+)
 public class Invoice {
 
 	@Id
@@ -38,17 +44,25 @@ public class Invoice {
 	@Required
 	@DefaultValueCalculator(CurrentDateCalculator.class) // Fecha actual
 	private Date date;
+	
+	@ManyToOne(fetch=FetchType.LAZY, optional=false) // customer es obligatorio
+	@ReferenceView("Simple") // La vista llamada 'Simple' se usará para visualizar esta referencia
+	private Customer customer;
+		
+	@OneToMany(mappedBy="parent", cascade=CascadeType.ALL)
+	@ListProperties("product.number, product.description, quantity")
+	private Collection<Detail> details = new ArrayList<Detail>();
+	
+	public Collection<Detail> getDetails() {
+		return details;
+	}
+
+	public void setDetails(Collection<Detail> details) {
+		this.details = details;
+	}
 
 	@Stereotype("MEMO")
 	private String remarks;
-	
-	@ManyToOne(fetch=FetchType.LAZY, optional=false) // customer es obligatorio
-	private Customer customer;
-	
-	
-	@OneToMany(mappedBy="parent", cascade = CascadeType.ALL)
-	//@ListProperties("product.number, product.description, quantity")
-	private Collection<Detail> details = new ArrayList<Detail>();
 	
 	public Customer getCustomer() {
 		return customer;
@@ -97,7 +111,5 @@ public class Invoice {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-
-	
 
 }
