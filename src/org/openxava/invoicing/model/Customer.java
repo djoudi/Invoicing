@@ -13,8 +13,7 @@ public class Customer {
 	@Id
 	// La propiedad number es la clave. Las claves son obligatorias (required)
 	// por defecto
-	@Column(length = 6)
-	// La longitud de columna se usa a nivel UI y a nivel DB
+	@Column(length = 6)// La longitud de columna se usa a nivel UI y a nivel DB	
 	private int number;
 
 	@Column(length = 50)

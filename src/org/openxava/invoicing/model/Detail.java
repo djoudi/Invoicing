@@ -7,6 +7,7 @@ import org.hibernate.annotations.*;
 import org.openxava.annotations.*;
 
 @Entity
+@View(members="product, quantity") // En la misma línea, ya que están separado por comas
 public class Detail {
 	
 	@ManyToOne // Sin lazy fetching porque falla al quitar un detalle desde el padre
@@ -20,6 +21,8 @@ public class Detail {
 	private int quantity;
 	
 	@ManyToOne(fetch=FetchType.LAZY, optional=true)
+	@ReferenceView("Simple") // Product se visualiza usando su vista Simple
+	@NoFrame // No se usa un marco alrededor de los datos de product
 	private Product product;
 	
 	public Invoice getParent() {
@@ -45,8 +48,6 @@ public class Detail {
 	}
 	public void setProduct(Product product) {
 		this.product = product;
-	}
-	
-	
+	}	
 	
 }

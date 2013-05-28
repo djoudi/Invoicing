@@ -4,11 +4,12 @@ import javax.persistence.*;
 import org.openxava.calculators.*;
 import org.openxava.jpa.*;
 
-public class NextNumberForYearCalculator implements ICalculator { // Un
-																	// calculador
-																	// tiene que
-																	// implementar
-																	// ICalculator
+public class NextNumberForYearCalculator implements ICalculator { // Un calculador tiene que implementar ICalculator
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3544802276051094075L;
+
 	private int year; // Este valor se inyectará (usando su setter) antes de
 						// calcular
 

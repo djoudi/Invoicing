@@ -7,6 +7,7 @@ import javax.persistence.*;
 import org.openxava.annotations.*;
 
 @Entity
+@View(name="Simple",members="number, description")
 public class Product {
 
 	@Id
@@ -16,6 +17,10 @@ public class Product {
 	@Column(length = 50)
 	@Required
 	private String description;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@DescriptionsList
+	private Author author;
 	
 	@ManyToOne( // La referencia se almacena como una relación en la base de datos
 	fetch = FetchType.LAZY, // La referencia se carga bajo demanda
@@ -55,6 +60,14 @@ public class Product {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Author getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(Author author) {
+		this.author = author;
 	}
 
 	public Category getCategory() {
