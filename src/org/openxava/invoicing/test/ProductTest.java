@@ -54,11 +54,13 @@ public class ProductTest extends ModuleTestBase {
 
 		execute("CRUD.refresh");
 		assertValue("price", "10.00");
+		
 		// Cambiar el precio
 		setValue("price", "12.00");
 		execute("CRUD.save");
 		assertNoErrors();
 		assertValue("price", "");
+		
 		// Verificar
 		setValue("number", Integer.toString(product1.getNumber())); // (1)
 		execute("CRUD.refresh");
