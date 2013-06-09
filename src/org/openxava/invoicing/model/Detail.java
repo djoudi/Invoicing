@@ -3,21 +3,15 @@ package org.openxava.invoicing.model;
 import javax.persistence.*;
 import javax.persistence.Entity;
 
-import org.hibernate.annotations.*;
 import org.openxava.annotations.*;
 
 @Entity
 @View(members="product, quantity") // En la misma línea, ya que están separado por comas
-public class Detail {
+public class Detail extends Identifiable{
 	
 	@ManyToOne // Sin lazy fetching porque falla al quitar un detalle desde el padre
-	private Invoice parent;
+	private CommercialDocument parent;
 	
-	@Id @GeneratedValue(generator="system-uuid") @Hidden
-	@GenericGenerator(name="system-uuid", strategy = "uuid")
-	@Column(length=32)
-	private String oid;
-		
 	private int quantity;
 	
 	@ManyToOne(fetch=FetchType.LAZY, optional=true)
@@ -25,17 +19,11 @@ public class Detail {
 	@NoFrame // No se usa un marco alrededor de los datos de product
 	private Product product;
 	
-	public Invoice getParent() {
+	public CommercialDocument getParent() {
 		return parent;
 	}
-	public void setParent(Invoice parent) {
+	public void setParent(CommercialDocument parent) {
 		this.parent = parent;
-	}
-	public String getOid() {
-		return oid;
-	}
-	public void setOid(String oid) {
-		this.oid = oid;
 	}
 	public int getQuantity() {
 		return quantity;

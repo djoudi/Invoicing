@@ -5,18 +5,11 @@ import java.util.*;
 import javax.persistence.*;
 import javax.persistence.Entity;
 
-import org.hibernate.annotations.*;
 import org.openxava.annotations.*;
 
 @Entity
-public class Author {
-
-	@Id
-	@GeneratedValue(generator = "system-uuid")
-	@Hidden
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
-	@Column(length = 32)
-	private String oid;
+//Extiende de Identifiable por tanto no necesita tener una propiedad id
+public class Author extends Identifiable{
 
 	@Column(length = 50)
 	@Required
@@ -25,14 +18,6 @@ public class Author {
 	@OneToMany(mappedBy = "author")
 	@ListProperties("number, description, price")
 	private Collection<Product> products;
-
-	public String getOid() {
-		return oid;
-	}
-
-	public void setOid(String oid) {
-		this.oid = oid;
-	}
 
 	public String getName() {
 		return name;
