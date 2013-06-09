@@ -7,10 +7,5 @@
 	<classpathentry kind="src" path="persistence"/>
 	<classpathentry kind="src" path="xava"/>
 	<classpathentry kind="src" path="i18n"/>
-	<classpathentry kind="var" path="MYSQL__DRIVER">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/D:/Programas/Librerias/mysql-connector-java-5.1.25/docs/"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="output" path="web/WEB-INF/classes"/>
 </classpath>
